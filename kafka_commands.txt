@@ -1,0 +1,6 @@
+* collect from source file (sample-data.json)
+bin/connect-standalone.sh config/connect-standalone.properties config/connect-file-source.properties > logs/kafka-connector.log 2>&1 &
+
+* Watch Kafka topic
+bin/kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --topic Outbound
+

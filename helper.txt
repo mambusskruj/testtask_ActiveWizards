@@ -1,0 +1,32 @@
+Test task installations and preparations
+
+* Install Java
+sudo apt-get install default-jre
+sudo apt-get install default-jdk
+
+* Install Zookeper
+* install Kafka
+
+ROOT user
+
+* Run Kafka as a deamon
+kafka/bin/kafka-server-start.sh -daemon /opt/kafka/kafka_2.11-0.11.0.1/config/server.properties
+
+* Kreate topic Inbound
+kafka/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic Inbound
+
+* collect from source file 
+kafka/bin/connect-standalone.sh config/connect-standalone.properties config/connect-file-source.properties > logs/kafka-connector.log 2>&1 &
+
+
+* Watch Kafka topic from beginning 
+kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic Inbound --from-beginning
+
+* install Spark
+
+* Open Spark python-shell 
+spark/bin/pyspark
+
+* Install kafka-python package
+pip install kafka-python
+

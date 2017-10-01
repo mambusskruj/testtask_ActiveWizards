@@ -1,0 +1,16 @@
+{
+"type": "record",
+"doc":"This event records the sale of a product",
+"name": "ProductSaleEvent",
+"fields" : [
+{"name":"time", "type":"long", "doc":"The time of the purchase"},
+{"name":"customer_id", "type":"long", "doc":"The customer"},
+{"name":"product_id", "type":"long", "doc":"The product"},
+{"name":"quantity", "type":"int"},
+{"name":"payment",
+"type":{"type":"enum",
+"name":"payment_types",
+"symbols":["cash","mastercard","visa"]},
+"doc":"The method of payment"}
+]
+}
