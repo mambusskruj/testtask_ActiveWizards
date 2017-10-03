@@ -9,6 +9,7 @@ import sys
 import json
 import argparse
 
+
 parser = argparse.ArgumentParser(
     description="Pipeline Kafka-Spark. \
         Get data from Kafka topic, remove field 'fields' from json \
@@ -50,11 +51,18 @@ BROKER = args.broker
 
 
 def sendToBroker(json_records):
+    """Send data to Kafka topic with KafkaProducer object."""
     producer = KafkaProducer(bootstrap_servers=[BROKER])
     producer.send(TOPIC_OUT, json_records)
     producer.flush()
 
+
 def handler(rdd_mapped):
+    """
+    Handle prepared RDD. Each RDD item's 'payload' field append to string. 
+    Create json object from string. Flter out field 'fields'. 
+    Then call method 'send'. 
+    """
     records = rdd_mapped.collect()
     records_str = ""
 
@@ -70,6 +78,7 @@ def handler(rdd_mapped):
 
 
 if __name__ == "__main__":
+    """Create Spark context, create KafkaRDD, prepare RDD for filtering."""
     sc = SparkContext(appName="Kafka")
     sc.setLogLevel("WARN")
   
