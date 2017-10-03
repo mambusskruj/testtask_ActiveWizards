@@ -31,4 +31,4 @@ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic Inbound 
 pip install kafka-python
 
 * Run pyspark script with parameters
-bin/spark-submit --packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.1.0 /home/ubuntu/scripts_spark/kafka_task.py --topic_in=Inbound --topic_out=Outbound --broker=127.0.0.1:9092
+bin/spark-submit --packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.1.0 /home/ubuntu/testtask_ActiveWizards/scripts_spark/kafka_task.py --topic_in=Inbound --topic_out=Outbound --broker=127.0.0.1:9092
