@@ -10,23 +10,25 @@ sudo apt-get install default-jdk
 ROOT user
 
 * Run Kafka as a deamon
-kafka/bin/kafka-server-start.sh -daemon /opt/kafka/kafka_2.11-0.11.0.1/config/server.properties
+bin/kafka-server-start.sh -daemon /opt/kafka/kafka_2.11-0.11.0.1/config/server.properties
 
 * Kreate topic Inbound
-kafka/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic Inbound
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic Inbound
 
 * collect from source file 
-kafka/bin/connect-standalone.sh config/connect-standalone.properties config/connect-file-source.properties > logs/kafka-connector.log 2>&1 &
+bin/connect-standalone.sh config/connect-standalone.properties config/connect-file-source.properties > logs/kafka-connector.log 2>&1 &
 
 
 * Watch Kafka topic from beginning 
-kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic Inbound --from-beginning
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic Inbound --from-beginning
 
 * install Spark
 
 * Open Spark python-shell 
-spark/bin/pyspark
+/bin/pyspark
 
 * Install kafka-python package
 pip install kafka-python
 
+* Run pyspark script with parameters
+bin/spark-submit --packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.1.0 /home/ubuntu/scripts_spark/kafka_task.py --topic_in=Inbound --topic_out=Outbound --broker=127.0.0.1:9092
